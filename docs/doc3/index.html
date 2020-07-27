@@ -1,0 +1,186 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Validación de Negocio · Benchmarks SIMF</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Para la validación de negocio que se encontrará hard typed; se sugiere la utilización del tipo de variable **enum** para definir los codigos de los bancos y también"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Validación de Negocio · Benchmarks SIMF"/><meta property="og:type" content="website"/><meta property="og:url" content="https://oscarquin27.github.io/benchmarksimf/"/><meta property="og:description" content="Para la validación de negocio que se encontrará hard typed; se sugiere la utilización del tipo de variable **enum** para definir los codigos de los bancos y también"/><meta property="og:image" content="https://oscarquin27.github.io/benchmarksimf/img/undraw_online.svg"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://oscarquin27.github.io/benchmarksimf/img/undraw_tweetstorm.svg"/><link rel="shortcut icon" href="/benchmarksimf/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/benchmarksimf/js/scrollSpy.js"></script><link rel="stylesheet" href="/benchmarksimf/css/main.css"/><script src="/benchmarksimf/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/benchmarksimf/"><img class="logo" src="/benchmarksimf/img/favicon.ico" alt="Benchmarks SIMF"/><h2 class="headerTitleWithLogo">Benchmarks SIMF</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/benchmarksimf/docs/doc1" target="_self">Docs</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Benchmarks</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Introducción</h3><ul class=""><li class="navListItem"><a class="navItem" href="/benchmarksimf/docs/doc1">Benchmarks</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Benchmarks</h3><ul class=""><li class="navListItem"><a class="navItem" href="/benchmarksimf/docs/doc2">NewtonSoft vs System vs Utf8 Json Deserializer</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/benchmarksimf/docs/doc3">Validación de Negocio</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">Validación de Negocio</h1></header><article><div><span><p>Para la validación de negocio que se encontrará hard typed; se sugiere la utilización del tipo de variable <strong>enum</strong> para definir los codigos de los bancos y también
+para los distintos tipos de moneda <strong>Ccy</strong>.</p>
+<pre><code class="hljs css language-csharp">[<span class="hljs-meta">Flags</span>]
+        <span class="hljs-keyword">public</span> <span class="hljs-keyword">enum</span> CodBancos
+        {
+            Banco100 = <span class="hljs-number">0156</span>,
+            BancoABN = <span class="hljs-number">0196</span>,
+            Bancamiga = <span class="hljs-number">0172</span>,
+            BancoActivo = <span class="hljs-number">0171</span>,
+            BancoAgricola = <span class="hljs-number">0166</span>,
+            BancoBicentenario = <span class="hljs-number">0175</span>,
+            BancoCaroni =  <span class="hljs-number">0128</span>,
+            BancoDesarrollo = <span class="hljs-number">0164</span>,
+            BancoVzla = <span class="hljs-number">0102</span>,
+            BancoCaribe = <span class="hljs-number">0114</span>,
+            BancoSoberano = <span class="hljs-number">0149</span>,
+            BancoTesoro = <span class="hljs-number">0163</span>,
+            BancoEspirito = <span class="hljs-number">0176</span>,
+            BancoExterior = <span class="hljs-number">0115</span>,
+            BancoIndustrial = <span class="hljs-number">0003</span>,
+            BancoInternacionalDesarrollo = <span class="hljs-number">0173</span>,
+            BancoMercantil = <span class="hljs-number">0105</span>,
+            BancoNacionalCredito = <span class="hljs-number">0191</span>,
+            BancoOccidental = <span class="hljs-number">0116</span>,
+            BancoPlaza = <span class="hljs-number">0138</span>,
+            BancoProvincial = <span class="hljs-number">0108</span>,
+            BancoVenezolanoCredito = <span class="hljs-number">0104</span>,
+            BancoBancrecer = <span class="hljs-number">0168</span>,
+            BancoBanFANB = <span class="hljs-number">0177</span>,
+            BancoBangente = <span class="hljs-number">0146</span>,
+            BancoBanplus = <span class="hljs-number">0174</span>,
+            BancoCitibank = <span class="hljs-number">0190</span>,
+            BancoCorpBanca = <span class="hljs-number">0121</span>,
+            BancoDelsur = <span class="hljs-number">0157</span>,
+            BancoFondoComun = <span class="hljs-number">0151</span>,
+            BancoInstitutoMunicipal = <span class="hljs-number">0601</span>,
+            BancoMibanco = <span class="hljs-number">0169</span>,
+            BancoSofitasa = <span class="hljs-number">0137</span>
+
+        }
+</code></pre>
+<p>La razón para utilizar el tipo <strong>Enum</strong> se debe a que como tal él no reserva espacio de memoria ya que actúa como un <strong>#define</strong> entonces existe es en la etapa de compilación.</p>
+<pre><code class="hljs css language-csharp"><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"><span class="hljs-keyword">string</span>[] args</span>)</span>
+        {
+            Console.WriteLine(<span class="hljs-keyword">sizeof</span>(CodBancos)); <span class="hljs-comment">// 4 Bytes en runtime memory</span>
+        }
+</code></pre>
+<p>Ahora la validación se puede hacer de la siguiente forma:</p>
+<pre><code class="hljs css language-csharp">[<span class="hljs-meta">Benchmark</span>]
+        <span class="hljs-keyword">public</span> (<span class="hljs-keyword">bool</span>,<span class="hljs-keyword">bool</span>,<span class="hljs-keyword">bool</span>) ValidarBancoCcy()
+        {
+            <span class="hljs-keyword">bool</span> success = <span class="hljs-literal">false</span>;
+            <span class="hljs-keyword">bool</span> success_2 = <span class="hljs-literal">false</span>;
+            <span class="hljs-keyword">bool</span> success_3 = <span class="hljs-literal">false</span>;
+                
+                CstmrCdtTrfInitnJson jsonFile = NetSystemDeserialization();
+                success = Enum.IsDefined(<span class="hljs-keyword">typeof</span>(CodBancos), <span class="hljs-keyword">int</span>.Parse(jsonFile.CstmrCdtTrfInitn.PmtInf[<span class="hljs-number">0</span>].DbtrAgt));
+                success_2 = Enum.IsDefined(<span class="hljs-keyword">typeof</span>(CodBancos), <span class="hljs-keyword">int</span>.Parse(jsonFile.CstmrCdtTrfInitn.PmtInf[<span class="hljs-number">0</span>].CdtrAgt));
+                success_3 = Enum.IsDefined(<span class="hljs-keyword">typeof</span>(Ccy), jsonFile.CstmrCdtTrfInitn.PmtInf[<span class="hljs-number">0</span>].Amount.Ccy);
+  
+            <span class="hljs-keyword">return</span> (success, success_2, success_3); <span class="hljs-comment">//Cualquier valor que retorne false quiere decir que hay un error en el json</span>
+        }
+</code></pre>
+<p>Ahora el resultado del benchmark:</p>
+<pre><code class="hljs css language-ini">
+BenchmarkDotNet=v0.12.1, OS=Windows 7 SP1 (6.1.7601.0)
+Intel Core i7-3770 CPU 3.40GHz (Ivy Bridge), 1 CPU, 8 logical and 4 physical cores
+Frequency=3420605 Hz, Resolution=292.3459 ns, Timer=TSC
+.NET Core SDK=3.1.201
+  [Host]     : .NET Core 3.1.4 (CoreCLR 4.700.20.20201, CoreFX 4.700.20.22101), X64 RyuJIT
+  DefaultJob : .NET Core 3.1.4 (CoreCLR 4.700.20.20201, CoreFX 4.700.20.22101), X64 RyuJIT
+
+
+</code></pre>
+<table>
+<thead>
+<tr><th>Method</th><th style="text-align:right">Mean</th><th style="text-align:right">Error</th><th style="text-align:right">StdDev</th><th style="text-align:right">Gen 0</th><th style="text-align:right">Gen 1</th><th style="text-align:right">Gen 2</th><th style="text-align:right">Allocated</th></tr>
+</thead>
+<tbody>
+<tr><td>ValidarBancoCcy</td><td style="text-align:right">47.51 μs</td><td style="text-align:right">0.400 μs</td><td style="text-align:right">0.355 μs</td><td style="text-align:right">3.2959</td><td style="text-align:right">-</td><td style="text-align:right">-</td><td style="text-align:right">13.54 KB</td></tr>
+<tr><td>NetSystemDeserialization</td><td style="text-align:right">45.62 μs</td><td style="text-align:right">0.200 μs</td><td style="text-align:right">0.167 μs</td><td style="text-align:right">3.2959</td><td style="text-align:right">-</td><td style="text-align:right">-</td><td style="text-align:right">13.48 KB</td></tr>
+<tr><td>IntParser</td><td style="text-align:right">45.75 μs</td><td style="text-align:right">0.088 μs</td><td style="text-align:right">0.082 μs</td><td style="text-align:right">3.2959</td><td style="text-align:right">-</td><td style="text-align:right">-</td><td style="text-align:right">13.51 KB</td></tr>
+</tbody>
+</table>
+<p>Se puede notar que la data asignada en el método ValidarBancoCcy puede ser proveniente de la Deserialización de NetSystem y posiblemente el int.Parse.</p>
+<p>Una forma de demostrarlo es inyectando los valores manualmente sin tener que leer del archivo json. <em>Archivo json utilizado para las pruebas: INC.CDT.IMDT.001.01.JSON</em></p>
+<pre><code class="hljs css language-ini">
+BenchmarkDotNet=v0.12.1, OS=Windows 7 SP1 (6.1.7601.0)
+Intel Core i7-3770 CPU 3.40GHz (Ivy Bridge), 1 CPU, 8 logical and 4 physical cores
+Frequency=3420605 Hz, Resolution=292.3459 ns, Timer=TSC
+.NET Core SDK=3.1.201
+  [Host]     : .NET Core 3.1.4 (CoreCLR 4.700.20.20201, CoreFX 4.700.20.22101), X64 RyuJIT
+  DefaultJob : .NET Core 3.1.4 (CoreCLR 4.700.20.20201, CoreFX 4.700.20.22101), X64 RyuJIT
+
+
+</code></pre>
+<table>
+<thead>
+<tr><th>Method</th><th style="text-align:right">Mean</th><th style="text-align:right">Error</th><th style="text-align:right">StdDev</th><th style="text-align:right">Gen 0</th><th style="text-align:right">Gen 1</th><th style="text-align:right">Gen 2</th><th style="text-align:right">Allocated</th></tr>
+</thead>
+<tbody>
+<tr><td>ValidarBancoCcy</td><td style="text-align:right">280.5 ns</td><td style="text-align:right">0.39 ns</td><td style="text-align:right">0.35 ns</td><td style="text-align:right">0.0114</td><td style="text-align:right">-</td><td style="text-align:right">-</td><td style="text-align:right">48 B</td></tr>
+<tr><td>NetSystemDeserialization</td><td style="text-align:right">45,234.1 ns</td><td style="text-align:right">216.40 ns</td><td style="text-align:right">168.95 ns</td><td style="text-align:right">3.2959</td><td style="text-align:right">-</td><td style="text-align:right">-</td><td style="text-align:right">13808 B</td></tr>
+<tr><td>IntParser</td><td style="text-align:right">46,280.4 ns</td><td style="text-align:right">388.68 ns</td><td style="text-align:right">344.55 ns</td><td style="text-align:right">3.2959</td><td style="text-align:right">-</td><td style="text-align:right">-</td><td style="text-align:right">13834 B</td></tr>
+</tbody>
+</table>
+<p>En este caso, inyectando los valores manualmente, se puede observar que la asignación de memoria es casi nula, por lo que el trabajo realizado corresponde al deserializador.
+Ahora realizando pruebas para 10 mil operaciones y utilizando el deserializador.</p>
+<pre><code class="hljs css language-ini">
+BenchmarkDotNet=v0.12.1, OS=Windows 7 SP1 (6.1.7601.0)
+Intel Core i7-3770 CPU 3.40GHz (Ivy Bridge), 1 CPU, 8 logical and 4 physical cores
+Frequency=3420605 Hz, Resolution=292.3459 ns, Timer=TSC
+.NET Core SDK=3.1.201
+  [Host]     : .NET Core 3.1.4 (CoreCLR 4.700.20.20201, CoreFX 4.700.20.22101), X64 RyuJIT
+  DefaultJob : .NET Core 3.1.4 (CoreCLR 4.700.20.20201, CoreFX 4.700.20.22101), X64 RyuJIT
+
+
+</code></pre>
+<table>
+<thead>
+<tr><th>Method</th><th style="text-align:right">Mean</th><th style="text-align:right">Error</th><th style="text-align:right">StdDev</th><th style="text-align:right">Gen 0</th><th style="text-align:right">Gen 1</th><th style="text-align:right">Gen 2</th><th style="text-align:right">Allocated</th></tr>
+</thead>
+<tbody>
+<tr><td>ValidarBancoCcy</td><td style="text-align:right">466,687.35 μs</td><td style="text-align:right">4,175.556 μs</td><td style="text-align:right">3,486.779 μs</td><td style="text-align:right">33000.0000</td><td style="text-align:right">-</td><td style="text-align:right">-</td><td style="text-align:right">135365.34 KB</td></tr>
+<tr><td>NetSystemDeserialization</td><td style="text-align:right">45.38 μs</td><td style="text-align:right">0.657 μs</td><td style="text-align:right">0.615 μs</td><td style="text-align:right">3.2959</td><td style="text-align:right">-</td><td style="text-align:right">-</td><td style="text-align:right">13.48 KB</td></tr>
+<tr><td>IntParser</td><td style="text-align:right">46.28 μs</td><td style="text-align:right">0.910 μs</td><td style="text-align:right">0.710 μs</td><td style="text-align:right">3.2959</td><td style="text-align:right">0.0610</td><td style="text-align:right">-</td><td style="text-align:right">13.51 KB</td></tr>
+</tbody>
+</table>
+<p>Se tomaría 0.046687 segundos realizar 10 mil validaciones de negocio, alojando 13 Mb de memoria.</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/benchmarksimf/docs/doc2"><span class="arrow-prev">← </span><span class="function-name-prevnext">NewtonSoft vs System vs Utf8 Json Deserializer</span></a></div></div></div><nav class="onPageNav"></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/benchmarksimf/" class="nav-home"><img src="/benchmarksimf/img/favicon.ico" alt="Benchmarks SIMF" width="66" height="58"/></a><div><h5>Docs</h5><a href="/benchmarksimf/docs/en/doc1.html">Getting Started (or other categories)</a><a href="/benchmarksimf/docs/en/doc2.html">Guides (or other categories)</a><a href="/benchmarksimf/docs/en/doc3.html">API Reference (or other categories)</a></div><div><h5>Community</h5><a href="/benchmarksimf/en/users.html">User Showcase</a><a href="https://stackoverflow.com/questions/tagged/" target="_blank" rel="noreferrer noopener">Stack Overflow</a><a href="https://discordapp.com/">Project Chat</a><a href="https://twitter.com/" target="_blank" rel="noreferrer noopener">Twitter</a></div><div><h5>More</h5><a href="/benchmarksimf/blog">Blog</a><a href="https://github.com/">GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><a href="https://opensource.facebook.com/" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/benchmarksimf/img/oss_logo.png" alt="Facebook Open Source" width="170" height="45"/></a><section class="copyright">Copyright © 2020 Your Name or Your Company Name</section></footer></div></body></html>
