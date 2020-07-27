@@ -1,0 +1,9 @@
+{
+  "docs": {
+    "Introducción": ["doc1"],
+    "Benchmarks": ["doc2", "doc3"]
+  },
+  "docs-other": {
+    "First Category": ["doc4", "doc5"]
+  }
+}
